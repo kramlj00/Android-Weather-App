@@ -74,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.d("Clima", "onResume() called");
+
+        Intent myIntent = getIntent();
+        String city = myIntent.getStringExtra("City");
+
         Log.d("Clima", "Getting weather for current location");
         getWeatherForCurrentLocation();
     }
