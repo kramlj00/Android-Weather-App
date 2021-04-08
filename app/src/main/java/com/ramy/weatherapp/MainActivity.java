@@ -147,8 +147,8 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response){
                 Log.d("Clima", "Success! JSON: " + response.toString());
 
-                WeatherDataModel weatherDataModel = WeatherDataModel.fromJson(response);
-
+                WeatherDataModel weatherData = WeatherDataModel.fromJson(response);
+                updateUI(weatherData);
             }
 
             @Override
@@ -160,6 +160,15 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    private void updateUI (WeatherDataModel weather) {
+        mTemperatureLabel.setText(weather.getTemperature());
+        mCityLabel.setText(weather.getCity());
+
+        int resourceID = getResources().getIdentifier(weather.getIconName(), "drawable", getPackageName());
+
+        mWeatherImage.setImageResource(resourceID);
     }
 
 }
