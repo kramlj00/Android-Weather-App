@@ -197,5 +197,12 @@ public class MainActivity extends AppCompatActivity {
         mWeatherImage.setImageResource(resourceID);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
 
+        if(mLocationManager != null){
+            mLocationManager.removeUpdates(mLocationListener);
+        }
+    }
 }
