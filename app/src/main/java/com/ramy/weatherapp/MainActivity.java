@@ -78,8 +78,20 @@ public class MainActivity extends AppCompatActivity {
         Intent myIntent = getIntent();
         String city = myIntent.getStringExtra("City");
 
-        Log.d("Clima", "Getting weather for current location");
-        getWeatherForCurrentLocation();
+        if(city != null){
+            getWeatherForNewCity(city);
+        } else {
+            Log.d("Clima", "Getting weather for current location");
+            getWeatherForCurrentLocation();
+        }
+    }
+
+    private void getWeatherForNewCity (String city){
+
+        RequestParams params = new RequestParams();
+        params.put("q", city);
+        params.put("appid", APP_ID);
+        letsDoSomeNetworking(params);
     }
 
     private void getWeatherForCurrentLocation() {
@@ -184,5 +196,6 @@ public class MainActivity extends AppCompatActivity {
 
         mWeatherImage.setImageResource(resourceID);
     }
+
 
 }
